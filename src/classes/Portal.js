@@ -1,5 +1,7 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from "three"
+import Loader from './Loader'
+
 
 import portalVert from '../shaders/portal.vert'
 import portalFrag from '../shaders/portal.frag'
@@ -14,7 +16,7 @@ class Portal {
     init(scene) {
         this.scene = scene
         this.mesh
-        this.loader = new GLTFLoader()
+        this.loader = new GLTFLoader(Loader.manager)
         this.portalShader = new THREE.ShaderMaterial({
             vertexShader: portalVert,
             fragmentShader: portalFrag,

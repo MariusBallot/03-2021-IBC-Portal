@@ -16,11 +16,17 @@ export default {
 </script>
 
 <style lang="stylus">
+@font-face {
+  font-family: Butler;
+  src: url('Butler-Bold.woff');
+}
+
 body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: radial-gradient(#5b5b5b, #333333);
+  font-family: Butler;
 }
 
 * {

@@ -1,5 +1,6 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from "three"
+import Loader from './Loader'
 
 class Decor {
 
@@ -10,8 +11,7 @@ class Decor {
     init(scene) {
         this.scene = scene
         this.mesh
-        this.loader = new GLTFLoader()
-        this.texLoader = new THREE.TextureLoader()
+        this.loader = new GLTFLoader(Loader.manager)
 
         this.loader.load("assets/decor.gltf", (glb) => {
             glb.scene.traverse(child => {

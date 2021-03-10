@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { TweenLite } from "gsap"
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -21,11 +22,11 @@ class ThreeScene {
         this.controls
     }
 
-    init() {
+    init(container) {
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         this.renderer.debug.checkShaderErrors = true
-        document.body.appendChild(this.renderer.domElement)
+        container.appendChild(this.renderer.domElement)
 
         this.scene = new THREE.Scene()
 
@@ -55,6 +56,26 @@ class ThreeScene {
 
         window.addEventListener("resize", this.resizeCanvas)
         RAF.subscribe('threeSceneUpdate', this.update)
+
+
+    }
+
+    start() {
+        TweenLite.fromTo(this.scene.scale, 2, {
+            x: 0,
+            y: 0,
+            z: 0,
+        }, {
+            x: 1,
+            y: 1,
+            z: 1,
+        })
+
+        TweenLite.fromTo(this.scene.rotation, 2, {
+            y: Math.PI * 2,
+        }, {
+            y: 0,
+        })
     }
 
     update() {
@@ -76,6 +97,7 @@ class ThreeScene {
         this.resizeCanvas = this.resizeCanvas.bind(this)
         this.update = this.update.bind(this)
         this.init = this.init.bind(this)
+        this.start = this.start.bind(this)
     }
 }
 
